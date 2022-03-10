@@ -34,12 +34,12 @@ async def nhentai_data(_id):
                                 "p" : "png",
                                 "g" : "gif"
                              }
-            
-            for i in range(num_pages):
-                temp_ext = pages[i]["t"]
-                file_url = BASE_PAGE_IMG + f"{i+1}.{img_extensions[temp_ext]}"
-                page_links.append(file_url)
-            
+
+            page_links.extend(
+                BASE_PAGE_IMG + f'{i + 1}.{img_extensions[pages[i]["t"]]}'
+                for i in range(num_pages)
+            )
+
             return title, num_pages, artist, lang, tags, page_links
 
 async def _download(_id, dl_path, outfile_path):
